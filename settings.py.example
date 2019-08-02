@@ -1,0 +1,5 @@
+app_config = {
+    'secret_key': 'xxx',
+    'database_url': 'sqlite:///v2ex.db',
+    'admin': 'admin',
+}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% if current_user.is_anonymous %}
+{% include 'auth/_anomyous.html' %}
+{% else %}
+{% include 'auth/_user.html' %}
+{% endif %}
+{% endblock %}
+
+{% block main %}
+<div class="v2ex-box v2ex-content">
+    <div class="v2ex-nav-h1 ya-overflow">
+        <img class="v2ex-node-avatar ya-float-left" src="{{ n.gravatar() }}">
+        <a href="{{ url_for('topic.index') }}">V2EX</a>
+        <span>&nbsp;>&nbsp;</span>
+        <a href="{{ url_for('topic.node', id=n.id) }}">{{ n.name }}</a>
+        <a class="v2ex-text-gray2 v2ex-padding ya-float-right" href="#">加入收藏</a>
+        <span class="v2ex-text-gray2 v2ex-padding-right ya-float-right">{{ n.topics.count() }}</span>
+        <p class="v2ex-p-gray">
+            {% if n.introduction %}
+            {{ n.introduction }}
+            {% else %}
+            暂无简介
+            {% endif %}
+        </p>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('topic.add_view') }}"><button class="v2ex-button-primary">创建新主题</button></a>
+        {% endif %}
+    </div>
+    <div class="v2ex-main-cell">
+        {% for message in get_flashed_messages() %}
+        <p class="v2ex-message" onclick="$(this).slideUp('fast');">
+            {{ message }}
+        </p>
+        {% endfor %}
+    </div>
+    <div class="v2ex-main-cell">
+        {% for t in topic_list %}
+        <div class="v2ex-topic-container">
+            <img class="v2ex-user-avatar" src="{{ t.user.gravatar() }}"></img>
+            <span class="v2ex-comments-count">{{ t.comments.count() }}</span>
+            <p class="v2ex-topics-title"><a class="v2ex-a-default" href="{{ url_for("topic.topic", id=t.id) }}">{{ t.title }}</a></p>
+            <div class="v2ex-topics-footer">
+                <a class="v2ex-span-gray-default" href="{{ url_for('topic.node', id=t.node.id) }}">{{ t.node.name }}</a>
+                <span class="v2ex-span-gray-default">•</span>
+                <a class="v2ex-a-gray-default" href="#">{{ t.user.username }}</a>
+                <span class="v2ex-span-gray-default">•&nbsp{{ t.get_created_time() }}</span>
+                {% if t.comments.count() != 0 %}
+                <span class="v2ex-span-gray-default">•&nbsp最后回复来自 </span>
+                <a class="v2ex-a-gray-default" href="#">{{ t.comments[-1].user.username }}</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% if current_user.is_authenticated %}
+<div class="v2ex-box v2ex-content">
+    <div class="v2ex-main-cell v2ex-padding-left v2ex-comment-div">
+        <form action="{{ url_for('topic.add_from_node') }}" method="post">
+            <input class="ya-hide" name="node" value="{{ n.id }}">
+            <input class="v2ex-node-add-title" type="text" name="title" value="" placeholder="请输入主题标题，如果标题能够表达完整内容，则正文可以为空">
+            <textarea class="v2ex-node-add-content" name="content" placeholder="正文"></textarea>
+            <button class="v2ex-button-primary" type="submit" name="button">创建新主题</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

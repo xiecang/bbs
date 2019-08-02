@@ -1,39 +1,99 @@
 from flask import Flask
+from flask_migrate import Migrate
+from flask_migrate import MigrateCommand
+from flask_script import Manager
+from flask_script import Shell
+from models import db
+from models.user import User
+from models.user import login_manager
+from models.role import Role
+from routes.topic import main as routes_topic
+from routes.auth import main as routes_auth
+from routes.user import main as routes_user
+from routes.manage import main as routes_manage
+from settings import app_config
 
-import config
 
-
-# web framework
-# web application
-# __main__
 app = Flask(__name__)
-# 设置 secret_key 来使用 flask 自带的 session
-# 这个字符串随便你设置什么内容都可以
-app.secret_key = config.secret_key
+manager = Manager(app)
 
 
-"""
-在 flask 中，模块化路由的功能由 蓝图（Blueprints）提供
-蓝图可以拥有自己的静态资源路径、模板路径（现在还没涉及）
-用法如下
-"""
-# 注册蓝图
-# 有一个 url_prefix 可以用来给蓝图中的每个路由加一个前缀
-from routes.index import main as index_routes
-from routes.topic import main as topic_routes
-from routes.reply import main as reply_routes
-app.register_blueprint(index_routes)
-app.register_blueprint(topic_routes, url_prefix='/topic')
-app.register_blueprint(reply_routes, url_prefix='/reply')
+def make_shell_context():
+    return dict(app=app, db=db, User=User, Role=Role)
 
 
-# 运行代码
-if __name__ == '__main__':
-    # debug 模式可以自动加载你对代码的变动, 所以不用重启程序
-    # host 参数指定为 '0.0.0.0' 可以让别的机器访问你的代码
+def register_routes(app):
+    app.register_blueprint(routes_topic)
+    app.register_blueprint(routes_auth, url_prefix='/auth')
+    app.register_blueprint(routes_user, url_prefix='/user')
+    app.register_blueprint(routes_manage, url_prefix='/manage')
+
+
+def configure_app():
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    app.secret_key = app_config['secret_key']
+    app.config['SQLALCHEMY_DATABASE_URI'] = app_config['database_url']
+    app.config['AVATAR_FOLDER'] = 'static/img/user_avatar'
+    app.config['ADMIN'] = app_config['admin']
+    db.init_app(app)
+    # 创建所有表
+    with app.app_context():
+        db.create_all()
+    register_routes(app)
+    login_manager.init_app(app)
+
+
+def configured_app():
+    configure_app()
+    return app
+
+
+# 自定义的命令行命令用来运行服务器
+@manager.command
+def run():
     config = dict(
         debug=True,
-        host='0.0.0.0',
-        port=2000,
+        host='127.0.0.1',
+        port=5000,
     )
     app.run(**config)
+
+
+def configure_manager():
+    """
+    这个函数用来配置命令行选项
+    """
+    Migrate(app, db)
+    manager.add_command('db', MigrateCommand)
+    manager.add_command('shell', Shell(make_context=make_shell_context))
+
+
+def local_run():
+    config = dict(
+        debug=True,
+        host='127.0.0.1',
+        port=5000,
+    )
+    import os
+
+    d = "ignoreme/profile"
+    if not os.path.exists(d):
+        os.mkdir(d)
+
+    from werkzeug.middleware.profiler import ProfilerMiddleware
+
+    null = open(os.devnull, "w")
+    app.wsgi_app = ProfilerMiddleware(
+        app.wsgi_app,
+        stream=null,
+        profile_dir=d,
+        filename_format="{time}.{method}.{path}.{elapsed:06f}ms.prof", )
+    print(app.url_map)
+
+    app.run(**config)
+
+
+if __name__ == '__main__':
+    configure_manager()
+    configure_app()
+    local_run()

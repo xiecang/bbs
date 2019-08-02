@@ -1,14 +1,14 @@
-var initedEditor = function() {
-    var e = new Editor()
-    var element = $('.editor').get(0)
-    e.render(element)
-    return e
+var log = function() {
+    console.log(arguments)
 }
 
-var __main = function() {
-    initedEditor()
+var content_show = function() {
+    var text = document.getElementById("content").innerText;
+    var converter = new showdown.Converter();
+    var html = converter.makeHtml(text);
+    document.getElementById("content-show").innerHTML = html;
 }
 
-$(document).ready(function() {
-    __main()
-})
+window.onload = function() {
+    content_show();
+}

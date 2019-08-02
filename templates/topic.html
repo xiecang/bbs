@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block script %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/topic.js') }}"></script>
+{% endblock %}
+
+{% block sidebar %}
+{% if current_user.is_anonymous %}
+{% include 'auth/_anomyous.html' %}
+{% else %}
+{% include 'auth/_user.html' %}
+{% endif %}
+{% endblock %}
+
+{% block main %}
+<div class="v2ex-box v2ex-content">
+    <div class="v2ex-nav-h1 ya-overflow">
+        <img class="v2ex-topic-avatar ya-float-right" src="{{ topic.user.gravatar() }}">
+        <a href="{{ url_for("topic.index") }}">V2EX</a>
+        <span>&nbsp;>&nbsp;</span>
+        <a href="{{ url_for('topic.node', id=topic.node.id) }}">{{ topic.node.name }}</a>
+        <p class="v2ex-topic-title">{{ topic.title }}</p>
+        <div>
+            <a class="v2ex-a-gray-default" href="#">{{ topic.user.username }}</a>
+            <span class="v2ex-span-gray-default">•&nbsp{{ topic.get_created_time() }}</span>
+            {% if current_user == topic.user or current_user.is_administrator() %}
+            •&nbsp<a class="v2ex-a-gray-default" href="{{ url_for('topic.edit_view', id=topic.id) }}">编辑</a>
+            •&nbsp<a class="v2ex-a-gray-default" href="{{ url_for('topic.delete', id=topic.id) }}">删除</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="v2ex-main-cell">
+        {% for message in get_flashed_messages() %}
+        <p class="v2ex-message" onclick="$(this).slideUp('fast');">
+            {{ message }}
+        </p>
+        {% endfor %}
+    </div>
+    <p id="content" class="ya-hide">{{ topic.content }}</p>
+    <div id="content-show" class="v2ex-main-cell v2ex-topic-content v2ex-markdown-preview"></div>
+    <div class="v2ex-main-cell ya-overflow v2ex-topic-footer">
+        <a class="v2ex-label-other" href="#">加入收藏</a>
+        <a class="v2ex-label-other" href="#">Tweet</a>
+        <span class="v2ex-span-gray-default ya-float-right">•&nbsp1 人收藏</span>
+        <span class="v2ex-span-gray-default ya-float-right">{{ topic.clicked }} 次点击&nbsp</span>
+    </div>
+</div>
+<div id="comments" class="v2ex-box v2ex-content">
+    <div class="v2ex-comments-header">
+        <span class="v2ex-span-gray-default">{{ topic.comments.count() }} 回复</span>
+    </div>
+    {% for c in topic.comments %}
+    <div class="v2ex-topic-container v2ex-main-cell">
+        <img class="v2ex-user-avatar" src="{{ c.user.gravatar() }}"></img>
+        <div class="v2ex-comment-footer">
+            <a class="v2ex-a-gray-default" href="#">{{ c.user.username }}</a>
+            <span class="v2ex-span-gray-default">&nbsp{{ c.get_created_time() }}</span>
+            {% if current_user == c.user or current_user.is_administrator() %}
+            <a class="v2ex-a-gray-default" href="{{ url_for('topic.comment_delete', id=c.id) }}">删除</a>
+            {% endif %}
+        </div>
+        <p class="v2ex-comment-content"><a class="v2ex-a-default" href="{{ url_for('topic.topic', id=topic.id) }}">{{ c.content }}</a></p>
+    </div>
+    {% endfor %}
+</div>
+{% if current_user.is_authenticated %}
+<div class="v2ex-box v2ex-content">
+    <div class="v2ex-main-cell v2ex-padding-left">
+        <p class="v2ex-p-black">添加一条新回复</p>
+    </div>
+    <div class="v2ex-main-cell v2ex-padding-left v2ex-comment-div">
+        <form action="{{ url_for('topic.comment') }}" method="post">
+            <input type="text" name="topic_id" class="ya-hide" value="{{ topic.id }}">
+            <textarea class="v2ex-comment-input" name="comment"></textarea>
+            <button class="v2ex-button-primary" type="submit" name="button">回复</button>
+            <span class="v2ex-span-gray-default ya-float-right">请尽量让自己的回复能够对别人有所帮助</span>
+        </form>
+    </div>
+    <div class="v2ex-main-cell">
+        <a class="v2ex-a-gray1 v2ex-padding ya-float-right" href="{{ url_for('topic.index') }}">←V2EX</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% if current_user.is_anonymous %}
+{% include 'auth/_anomyous.html' %}
+{% else %}
+{% include 'auth/_user.html' %}
+{% endif %}
+<div class="v2ex-box v2ex-sidebar ya-overflow">
+    <div class="v2ex-sidebar-cell">
+        <p class="v2ex-sidebar-title1">社区运行状况</p>
+    </div>
+    <div class="v2ex-sidebar-cell">
+        <table>
+            <tr>
+                <td align="right"><span class="v2ex-text-gray2">注册会员</span></td>
+                <td align="left"><strong class="v2ex-text-gray2">&nbsp{{ statistics['user'] }}</strong></td>
+            </tr>
+            <tr>
+                <td align="right"><span class="v2ex-text-gray2">主题</span></td>
+                <td align="left"><strong class="v2ex-text-gray2">&nbsp{{ statistics['topic'] }}</strong></td>
+            </tr>
+            <tr>
+                <td align="right"><span class="v2ex-text-gray2">回复</span></td>
+                <td align="left"><strong class="v2ex-text-gray2">&nbsp{{ statistics['comment'] }}</strong></td>
+            </tr>
+        </table>
+    </div>
+    <div class="v2ex-sidebar-cell">
+        <p class="v2ex-text-gray1">> <a href="#">财富排行榜</a></p>
+        <p class="v2ex-text-gray1">> <a href="#">消费排行榜</a></p>
+    </div>
+</div>
+{% endblock %}
+
+{% block main %}
+<div class="v2ex-box">
+    <div class="v2ex-nav-h1">
+        {% for n in all_list['top_node_list'] %}
+            {% if top_node_id == n.id %}
+            <a class="v2ex-label-active" href="{{ url_for('topic.tab', id=n.id) }}">{{ n.name }}</a>
+            {% else %}
+            <a class="v2ex-label-other" href="{{ url_for('topic.tab', id=n.id) }}">{{ n.name }}</a>
+            {% endif %}
+        {% endfor %}
+        <a class="v2ex-label-other" href="{{ url_for('topic.all') }}">全部</a>
+    </div>
+    <div class="v2ex-nav-h2">
+        {% for n in all_list['node_list'] %}
+        <a class="v2ex-label-default" href="{{ url_for('topic.node', id=n.id) }}">{{ n.name }}</a>
+        {% endfor %}
+    </div>
+    {% for t in all_list['topic_list'] %}
+    <div class="v2ex-topic-container">
+        <img class="v2ex-user-avatar" src="{{ t.user.gravatar() }}"></img>
+        <a href="{{ url_for("topic.topic", id=t.id) }}#comments"><span class="v2ex-comments-count">{{ t.comments.count() }}</span></a>
+        <p class="v2ex-topics-title"><a class="v2ex-a-default" href="{{ url_for("topic.topic", id=t.id) }}">{{ t.title }}</a></p>
+        <div class="v2ex-topics-footer">
+            <a class="v2ex-span-gray-default" href="{{ url_for('topic.node', id=t.node.id) }}">{{ t.node.name }}</a>
+            <span class="v2ex-span-gray-default">•</span>
+            <a class="v2ex-a-gray-default" href="#">{{ t.user.username }}</a>
+            <span class="v2ex-span-gray-default">•&nbsp{{ t.get_created_time() }}</span>
+            {% if t.comments.count() != 0 %}
+            <span class="v2ex-span-gray-default">•&nbsp最后回复来自 </span>
+            <a class="v2ex-a-gray-default" href="#">{{ t.comments[-1].user.username }}</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

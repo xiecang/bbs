@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% include 'auth/_user.html' %}
+{% endblock %}
+
+{% block main %}
+<div class="v2ex-box v2ex-content">
+    <div class="v2ex-nav-h1">
+        <a href="{{ url_for("topic.index") }}">V2EX</a>
+        <span>&nbsp;>&nbsp;</span>
+        <span>管理</span>
+    </div>
+</div>
+
+<div class="v2ex-box v2ex-content">
+    <div class="v2ex-main-cell v2ex-padding-left v2ex-padding-right">
+        <p class="v2ex-p-black">管理顶级节点</p>
+    </div>
+    <div class="v2ex-main-cell v2ex-padding">
+        <span class="v2ex-span-gray-default">当前已有节点</span>
+        {% for n in top_node_list %}
+            <a class="v2ex-label-other" href="{{ url_for('topic.tab', id=n.id) }}">{{ n.name }}</a>
+        {% endfor %}
+    </div>
+    <div class="v2ex-main-cell v2ex-padding">
+        <form action="{{ url_for('manage.top_node_add') }}" method="post">
+            <input class="v2ex-input" type="text" name="top_node_name" value="">
+            <button class="v2ex-button-primary">添加</button>
+        </form>
+    </div>
+</div>
+
+<div class="v2ex-box v2ex-content">
+    <div class="v2ex-main-cell v2ex-padding-left v2ex-padding-right">
+        <p class="v2ex-p-black">管理二级节点</p>
+    </div>
+    <div class="v2ex-main-cell v2ex-padding">
+        <span class="v2ex-span-gray-default">当前已有节点</span>
+        {% for n in node_list %}
+            <a class="v2ex-label-other" href="{{ url_for('topic.node', id=n.id) }}">{{ n.name }}</a>
+        {% endfor %}
+    </div>
+    <div class="v2ex-main-cell v2ex-padding">
+        <form action="{{ url_for('manage.node_add') }}" method="post">
+            <select class="v2ex-add-node" name="top_node">
+                {% for n in top_node_list %}
+                    <option value="{{ n.id }}">{{ n.name }}</option>
+                {% endfor %}
+            </select>
+            <input class="v2ex-input" type="text" name="node_name" value="">
+            <button class="v2ex-button-primary">添加</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

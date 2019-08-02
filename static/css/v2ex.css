@@ -1,0 +1,460 @@
+a {
+    color: gray;
+}
+a:hover {
+    text-decoration: underline;
+}
+ul {
+    font-size: 10px;
+    margin: 1em 0px 1em 1.5em;
+    padding: 0px;
+}
+pre {
+    border: 1px solid lightgray;
+    border-radius: 1px;
+    padding: 10px;
+}
+code {
+    font-family: Consolas;
+    font-size: 13px;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    font-family: Microsoft Yahei;
+    color: #777;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    font-family: Microsoft Yahei;
+    color: #777;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    font-family: Microsoft Yahei;
+    color: #777;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    font-family: Microsoft Yahei;
+    color: #777;
+}
+.v2ex-user-avatar_l {
+    height: 64px;
+    width: 64px;
+    margin: 5px;
+    border-radius: 2px;
+}
+.v2ex-user-avatar_m {
+    height: 48px;
+    width: 48px;
+    margin: 5px;
+    border-radius: 2px;
+}
+.v2ex-user-avatar_s {
+    height: 24px;
+    width: 24px;
+    margin: 5px;
+    border-radius: 2px;
+}
+.v2ex-footer {
+    height: 100px;
+    border-top: 1px solid gray;
+    padding: 10px;
+}
+.v2ex-footer-nav {
+    margin: 10px 0px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.v2ex-wrapper {
+    min-width: 840px;
+    background: #e2e2e2;
+    padding: 20px 0px 0px 0px;;
+    overflow: hidden;
+}
+.v2ex-box {
+    background: #fff;
+    border-radius: 1px;
+    box-shadow: 1px 1px 1px #cac6c6;
+}
+.v2ex-padding {
+    padding: 10px;
+}
+.v2ex-padding-left {
+    padding-left: 10px;
+}
+.v2ex-padding-right {
+    padding-right: 10px;
+}
+.v2ex-main-container {
+    margin: 0px 258px 20px 0px;
+}
+.v2ex-sidebar-container {
+    width: 240px;
+}
+.v2ex-content {
+    margin-bottom: 20px;
+}
+.v2ex-sidebar {
+    width: 240px;
+    margin-bottom: 20px;
+}
+.v2ex-sidebar-about {
+    height: 50px;
+    border-bottom: 1px solid lightgray;
+}
+.v2ex-p-default {
+    font-size: 12px;
+    color: #000;
+    padding-top: 10px;
+}
+.v2ex-p-black {
+    font-size: 12px;
+    color: #000;
+    margin: 10px 0px;
+}
+.v2ex-p-gray {
+    font-size: 12px;
+    color: gray;
+    margin: 5px 0px 10px 0px;
+}
+.v2ex-text-title {
+    color: #000;
+    font-weight: bold;
+    font-family: Microsoft Yahei;
+    font-size: 12px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+.v2ex-text-default {
+    padding-top: 3px;
+    padding-left: 10px;
+    font-size: 12px;
+    color: gray;
+}
+.v2ex-text-gray1 {
+    color: gray;
+    font-size: 10px;
+    padding-top: 5px;
+}
+.v2ex-text-gray2 {
+    color: gray;
+    font-size: 10px;
+    padding-top: 3px;
+}
+.v2ex-button-default {
+    background: #f5f5f5;
+    color: gray;
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+.v2ex-button-default:hover {
+    text-decoration: none;
+}
+.v2ex-span-gray-default {
+    color: gray;
+    font-size: 10px;
+}
+.v2ex-a-gray-default {
+    color: #545e69;
+    font-weight: bold;
+    font-size: 10px;
+}
+.v2ex-a-gray1 {
+    color: gray;
+    font-size: 10px;
+}
+.v2ex-a-default {
+    color: #555;
+}
+.v2ex-button {
+    padding: 2px 8px;
+    border: 1px solid lightgray;
+    border-radius: 1px;
+    background: #fff;
+    font-size: 12px;
+}
+.v2ex-button:hover, .v2ex-button:focus {
+    border: 1px solid #778087;
+    border-radius: 2px;
+    outline: none;
+}
+.v2ex-button-primary {
+    padding: 2px 8px;
+    border: 1px solid lightgray;
+    border-radius: 1px;
+    background: #fff;
+    font-family: Microsoft Yahei;
+    font-size: 12px;
+    font-style: inherit;
+    font-weight: bolder;
+}
+.v2ex-button-primary:hover, .v2ex-button-parimary:focus {
+    border: 1px solid #778087;
+    border-radius: 2px;
+    outline: none;
+}
+.v2ex-sidebar-register {
+    padding: 10px;
+}
+.v2ex-nav-h1 {
+    font-size: 14px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+}
+.v2ex-nav-h2 {
+    font-size: 12px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+}
+.v2ex-nav-default {
+    font-size: 12px;
+    padding: 10px;
+}
+.v2ex-label-active {
+    background: #333344;
+    color: #fff;
+    padding: 1px 8px;
+    border-radius: 3px;
+}
+.v2ex-label-active:hover {
+    text-decoration: none;
+}
+.v2ex-label-other {
+    color: #555;
+    padding: 1px 8px;
+    border-radius: 3px;
+}
+.v2ex-label-other:hover {
+    text-decoration: none;
+    background: #e2e2e2;
+}
+.v2ex-label-default {
+    color: #555;
+    margin-left: 10px;
+}
+.v2ex-message {
+    font-size: 12px;
+    border-left: 4px solid #c7e8ff;
+    padding: 10px;
+}
+.v2ex-topic-container {
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+}
+.v2ex-user-avatar {
+    height: 40px;
+    width: 40px;
+    float: left;
+    border-radius: 4px;
+}
+.v2ex-topics-title {
+    width: 75%;
+    font-size: 15px;
+    padding-left: 52px;
+}
+.v2ex-topics-footer {
+    width: 80%;
+    padding-top: 6px;
+    padding-left: 52px;
+    font-size: 13px;
+}
+.v2ex-comments-count {
+    float: right;
+    background: #aab0c6;
+    color: #fff;
+    padding: 0px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-right: 6px;
+    margin-top: 25px;
+}
+.v2ex-comments-count:hover {
+    background: #969cb1;
+}
+.v2ex-sidebar-cell {
+    padding: 10px;
+    border-top: 1px solid #e2e2e2;
+}
+.v2ex-sidebar-user {
+    height: 46px;
+}
+.v2ex-user-avatar {
+    height: 40px;
+    width: 40px;
+    float: left;
+    border-radius: 4px;
+}
+.v2ex-user-name {
+    margin: 8px;
+    display: inline-block;
+}
+.v2ex-favorite-container {
+    text-align: center;
+}
+.v2ex-favorite {
+    text-align: center;
+    display: inline-block;
+}
+.v2ex-line1 {
+    height: 28px;
+    width: 1px;
+    margin-left: 10px;
+    background: #e2e2e2;
+    display: inline-block;
+}
+.v2ex-line2 {
+    height: 3px;
+    width: 24px;
+    background: #e2e2e2;
+}
+.v2ex-add {
+    height: 28px;
+    margin-right: 10px;
+    float: left;
+}
+.v2ex-sidebar-title1 {
+    font-size: 10px;
+    color: lightgray;
+}
+.v2ex-sidebar-title2 {
+    font-size: 10px;
+    color: black;
+}
+.v2ex-main-cell {
+    border-top: 1px solid #e2e2e2;
+    overflow: hidden;
+}
+.v2ex-input-container {
+    margin: 10px 74px;
+}
+.v2ex-input {
+    width: 270px;
+    height: 18px;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    padding: 2px 5px;
+}
+.v2ex-input:focus {
+    outline-style: none;
+}
+.v2ex-input-tip {
+    margin-right: 10px;
+}
+.v2ex-add-title {
+    width: 98%;
+    margin: 10px 0px;
+    border: 0px;
+    font-size: 12px;
+}
+.v2ex-add-title:focus {
+    outline: none;
+}
+.v2ex-add-content {
+    height: 280px;
+    width: 98%;
+    margin: 10px 0px;
+    resize: none;
+    font-family: Microsoft Yahei;
+    font-size: 12px;
+    border: none;
+}
+.v2ex-add-content:focus {
+    outline: none;
+}
+.v2ex-add-node {
+    height: 24px;
+    width: 282px;
+    margin: 10px 0px;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    padding: 0px 5px;
+}
+.v2ex-add-node:focus {
+    outline: none;
+}
+.v2ex-add-button-group {
+    padding: 10px;
+}
+.v2ex-topic-title {
+    margin: 10px 0px;
+    font-size: 20px;
+}
+.v2ex-topic-avatar {
+    height: 64px;
+    width: 64px;
+    margin: 0px 10px;
+    border-radius: 4px;
+}
+.v2ex-topic-content {
+    padding: 10px;
+    font-size: 12px;
+}
+.v2ex-topic-footer {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+.v2ex-comments-header {
+    margin: 5px 10px;
+}
+.v2ex-comment-footer {
+    margin: -8px 48px;
+}
+.v2ex-comment-content {
+    margin: 10px 48px;
+}
+.v2ex-comment-input {
+    width: 98.5%;
+    height: 100px;
+    display: block;
+    margin: 0px 0px 10px 0px;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    padding: 5px;
+    font-family: Microsoft Yahei;
+    font-size: 14px;
+    resize: none;
+}
+.v2ex-comment-input:focus {
+    outline: none;
+}
+.v2ex-comment-div {
+    padding: 10px;
+}
+.v2ex-node-avatar {
+    height: 64px;
+    width: 64px;
+    margin: 0px 10px 10px 0px;
+    border-radius: 4px;
+}
+.v2ex-node-add-title {
+    width: 98.5%;
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    padding: 5px;
+}
+.v2ex-node-add-title:focus {
+    outline: none;
+}
+.v2ex-node-add-content {
+    width: 98.5%;
+    height: 80px;
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    padding: 5px;
+    resize: none;
+}
+.v2ex-node-add-content:focus {
+    outline: none;
+}
+.v2ex-markdown-preview {
+    padding: 10px;
+}
+#markdown-preview img, #content-show img{
+    margin: 10px 0px;
+    max-width: 100%;
+}

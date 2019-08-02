@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block script %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/topic_add.js') }}"></script>
+{% endblock %}
+
+{% block sidebar %}
+<div class="v2ex-box v2ex-sidebar ya-overflow">
+    <div class="v2ex-sidebar-cell">
+        <p class="v2ex-sidebar-title2">发帖提示</p>
+        <ul>
+            <li>
+                <p class="v2ex-p-black">主题标题</p>
+                <span>请在标题中描述内容要点。如果一件事情在标题的长度内就已经可以说清楚，那就没有必要写正文了。</span>
+            </li>
+            <li>
+                <p class="v2ex-p-black">正文</p>
+                <span>可以在正文中为你要发布的主题添加更多细节。V2EX 支持 GitHub Flavored Markdown 文本标记语法。</br></br>在正式提交之前，你可以点击本页面左下角的“预览主题”来查看 Markdown 正文的实际渲染效果。</span>
+            </li>
+            <li>
+                <p class="v2ex-p-black">选择节点</p>
+                <span>在最后，请为你的主题选择一个节点。恰当的归类会让你发布的信息更加有用。</br></br>你可以在主题发布后 300 秒内，对标题或者正文进行编辑。同时，在 300 秒内，你可以重新为主题选择节点</span>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block main %}
+<div class="v2ex-box">
+    <div class="v2ex-nav-h1">
+        <a href="{{ url_for("topic.index") }}">V2EX</a>
+        <span>&nbsp;>&nbsp;</span>
+        <span>编辑主题</span>
+    </div>
+    <div class="v2ex-main-cell">
+        {% for message in get_flashed_messages() %}
+        <p class="v2ex-message" onclick="$(this).slideUp('fast');">
+            {{ message }}
+        </p>
+        {% endfor %}
+    </div>
+    <form action="{{ url_for('topic.edit', id=topic.id) }}" method="post">
+        <div class="v2ex-main-cell v2ex-padding-left">
+            <p class="v2ex-p-black">主题标题</p>
+        </div>
+        <div class="v2ex-main-cell v2ex-padding-left">
+            <input class="v2ex-add-title" type="text" name="title" value="{{ topic.title }}" placeholder="请输入主题标题，如果标题能够表达完整内容，则正文可以为空">
+        </div>
+        <div class="v2ex-main-cell v2ex-padding-left">
+            <p class="v2ex-p-black">正文</p>
+        </div>
+        <div class="v2ex-main-cell v2ex-padding-left">
+            <textarea id="content" class="v2ex-add-content" name="content" onkeyup="markdown_convert()">{{ topic.content }}</textarea>
+        </div>
+        <div class="v2ex-main-cell v2ex-padding-left">
+            <select class="v2ex-add-node" name="node">
+                {% for n in node_list %}
+                    <option value="{{ n.id }}">{{ n.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="v2ex-main-cell v2ex-padding-left v2ex-nav-default">
+            <sapn>最热节点</span>
+            {% for n in node_list %}
+            <a class="v2ex-label-other" href="#">{{ n.name }}</a>
+            {% endfor %}
+        </div>
+        <div class="v2ex-main-cell v2ex-padding-left v2ex-add-button-group">
+            <button class="v2ex-button-primary" type="button" name="button" onclick="markdown_preview()">预览主题</button>
+            <button class="v2ex-button-primary ya-float-right" type="submit" name="button">发布主题</button>
+        </div>
+    </form>
+    <div id="markdown-preview" class="v2ex-main-cell v2ex-padding-left v2ex-markdown-preview ya-hide"></div>
+</div>
+{% endblock %}

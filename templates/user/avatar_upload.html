@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% include 'auth/_user.html' %}
+{% endblock %}
+
+{% block main %}
+<div class="v2ex-box v2ex-content">
+    <div class="v2ex-nav-h1">
+        <a href="{{ url_for('topic.index') }}">V2EX</a>
+        <span>&nbsp;>&nbsp;</span>
+        <a href="{{ url_for('user.settings')}}">设置</a>
+        <span>&nbsp;>&nbsp;</span>
+        <span>头像上传</span>
+    </div>
+    <div class="v2ex-main-cell">
+        {% for message in get_flashed_messages() %}
+        <p class="v2ex-message" onclick="$(this).slideUp('fast');">
+            {{ message }}
+        </p>
+        {% endfor %}
+    </div>
+    <div class="v2ex-main-cell">
+        <div class="v2ex-input-container">
+            <form action="{{ url_for('user.avatar_upload') }}" method="post" enctype="multipart/form-data">
+                <table>
+                    <tr>
+                        <td align="right"><span class="v2ex-text-gray2 v2ex-input-tip">当前头像</span></td>
+                        <td align="left">
+                            <img class="v2ex-user-avatar_l" src="{{ user.gravatar() }}" />
+                            <img class="v2ex-user-avatar_m" src="{{ user.gravatar() }}" />
+                            <img class="v2ex-user-avatar_s" src="{{ user.gravatar() }}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="v2ex-text-gray2 v2ex-input-tip">选择一个图片文件</span></td>
+                        <td><input type=file name=file></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><span class="v2ex-text-gray2 v2ex-input-tip">支持 2MB 以内的 PNG / JPG / GIF 文件</span></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button class="v2ex-button-primary" type="submit" name="button">开始上传</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

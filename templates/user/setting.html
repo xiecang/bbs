@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% include 'auth/_user.html' %}
+{% endblock %}
+
+{% block main %}
+<div class="v2ex-box v2ex-content">
+    <div class="v2ex-nav-h1">
+        <a href="{{ url_for("topic.index") }}">V2EX</a>
+        <span>&nbsp;>&nbsp;</span>
+        <span>设置</span>
+    </div>
+    <div class="v2ex-main-cell">
+        <div class="v2ex-input-container">
+            <form action="" method="post">
+                <table>
+                    <tr>
+                        <td align="right"><span class="v2ex-text-gray2 v2ex-input-tip">用户名</span></td>
+                        <td align="left"><span class="v2ex-span-gray-default">{{ user.username }}</span></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button class="v2ex-button-primary" type="button" name="button">保存设置</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="v2ex-box v2ex-content">
+    <div class="v2ex-main-cell v2ex-padding-left v2ex-padding-right">
+        <p class="v2ex-p-black">头像上传</p>
+    </div>
+    <div class="v2ex-main-cell">
+        <div class="v2ex-input-container">
+            <table>
+                <tr>
+                    <td align="right"><span class="v2ex-text-gray2 v2ex-input-tip">当前头像</span></td>
+                    <td align="left">
+                        <img class="v2ex-user-avatar_l" src="{{ user.gravatar() }}" />
+                        <img class="v2ex-user-avatar_m" src="{{ user.gravatar() }}" />
+                        <img class="v2ex-user-avatar_s" src="{{ user.gravatar() }}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <a href="{{ url_for('user.settings_avatar') }}"><button class="v2ex-button-primary" type="button" name="button">上传新头像</button></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="v2ex-main-cell v2ex-padding-left">
+        <p class="v2ex-p-black">关于头像的规则</p>
+        <ul>
+            <li>
+                <span>V2EX 禁止使用任何低俗或者敏感图片作为头像</span>
+            </li>
+            <li>
+                <span>如果你是男的，请不要用女人的照片作为头像，这样可能会对其他会员产生误导</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="v2ex-box v2ex-content">
+    <div class="v2ex-main-cell v2ex-padding-left">
+        <p class="v2ex-p-black">更改密码</p>
+    </div>
+    <div class="v2ex-main-cell">
+        {% for message in get_flashed_messages() %}
+        <p class="v2ex-message" onclick="$(this).slideUp('fast');">
+            {{ message }}
+        </p>
+        {% endfor %}
+    </div>
+    <div class="v2ex-main-cell">
+        <div class="v2ex-input-container">
+            <form action="{{ url_for('user.change_password') }}" method="post">
+                <table>
+                    <tr>
+                        <td align="right"><span class="v2ex-text-gray2 v2ex-input-tip">当前密码</span></td>
+                        <td align="left"><input class="v2ex-input" type="password" name="password" value=""></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="v2ex-text-gray2 v2ex-input-tip">新密码</span></td>
+                        <td align="left"><input class="v2ex-input" type="password" name="password_new" value=""></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="v2ex-text-gray2 v2ex-input-tip">再次输入新密码</span></td>
+                        <td align="left"><input class="v2ex-input" type="password" name="password_new_repeat" value=""></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button class="v2ex-button-primary" type="submit" name="button">更改密码</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

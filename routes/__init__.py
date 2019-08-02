@@ -1,9 +1,14 @@
+from flask import Blueprint
+from flask import jsonify
+from flask import redirect
+from flask import render_template
+from flask import request
+from flask import send_from_directory
 from flask import session
-
-from models.user import User
-
-
-def current_user():
-    uid = session.get('user_id', '')
-    u = User.find_by(id=uid)
-    return u
+from flask import url_for
+from flask import abort
+from flask import flash
+from flask_login import login_user
+from flask_login import logout_user
+from flask_login import login_required
+from flask_login import current_user

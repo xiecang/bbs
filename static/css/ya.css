@@ -1,0 +1,83 @@
+body {
+    margin: 0px;
+}
+/*div {
+    outline-style: dashed;
+    outline-width: 1px;
+    outline-color: red;
+}*/
+div, h1, h2, h3, p, span, a, button {
+    font-family: Microsoft Yahei;
+    margin: 0px;
+    padding: 0px;
+}
+a {
+    text-decoration: none;
+}
+.ya-float-left {
+    float: left;
+}
+.ya-float-right {
+    float: right;
+}
+.ya-relative {
+    position: relative;
+}
+.ya-absolute {
+    position: absolute;
+}
+.ya-overflow {
+    overflow: auto;
+}
+.ya-hide {
+    display: none;
+}
+.ya-text-center {
+    text-align: center;
+}
+.ya-navbar {
+    height: 42px;
+    background: #fff;
+}
+.ya-container {
+    min-width: 800px;
+    max-width: 1080px;
+    margin: 0px auto;
+    padding: 0px 20px;
+}
+.ya-navbar-logo {
+    height: 28px;
+    position: absolute;
+    top: 6px;
+    left: 18px;
+}
+.ya-navbar-search {
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    left: 118px;
+}
+.ya-navbar-search-input {
+    height: 12px;
+    width: 162px;
+    position: absolute;
+    top: 13px;
+    left: 140px;
+    border: 0px;
+}
+.ya-navbar-search-input:focus {
+    outline-style: none;
+}
+.ya-navbar-items {
+
+}
+.ya-navbar-item {
+    text-decoration: none;
+    color: #556;
+    font-size: 14px;
+    margin-top: 12px;
+    margin-left: 12px;
+}
+.ya-navbar-item:hover {
+    color: #778087;
+}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+<div class="v2ex-box v2ex-sidebar">
+    <div class="v2ex-sidebar-about">
+        <p class="v2ex-text-title">其他登录方式</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block main %}
+<div class="v2ex-box">
+    <div class="v2ex-nav-h1">
+        <a href="{{ url_for("topic.index") }}">V2EX</a>
+        <span>&nbsp;>&nbsp;</span>
+        <span>登录</span>
+    </div>
+    <div class="v2ex-main-cell">
+        {% for message in get_flashed_messages() %}
+        <p class="v2ex-message" onclick="$(this).slideUp('fast');">
+            {{ message }}
+        </p>
+        {% endfor %}
+    </div>
+    <div class="v2ex-main-cell">
+        <div class="v2ex-input-container">
+            <form action="{{ url_for('auth.login') }}" method="post">
+                <table>
+                    <tr>
+                        <td align="right"><span class="v2ex-text-gray2 v2ex-input-tip">用户名</span></td>
+                        <td align="left"><input class="v2ex-input" type="text" name="username" value=""></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><span class="v2ex-text-gray2 v2ex-input-tip">密码</span></td>
+                        <td align="left"><input class="v2ex-input" type="password" name="password" value=""></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button class="v2ex-button" type="submit" name="button">登录</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<div class=""></div>
+{% endblock %}

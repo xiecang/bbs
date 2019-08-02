@@ -1,0 +1,34 @@
+<div class="v2ex-box v2ex-sidebar ya-overflow">
+    <div class="v2ex-sidebar-cell">
+        <div class="v2ex-sidebar-user">
+            <img class="v2ex-user-avatar" src="{{ current_user.gravatar() }}" />
+            <a class="v2ex-user-name" href="#">{{ current_user.username }}</a>
+        </div>
+        <div class="v2ex-favorite-container">
+            <div class="v2ex-favorite">
+                <p class="v2ex-text-default">0</p>
+                <a class="v2ex-text-default" href="#">节点收藏</a>
+            </div>
+            <div class="v2ex-line1"></div>
+            <div class="v2ex-favorite">
+                <p class="v2ex-text-default">0</p>
+                <a class="v2ex-text-default" href="#">主题收藏</a>
+            </div>
+            <div class="v2ex-line1"></div>
+            <div class="v2ex-favorite">
+                <p class="v2ex-text-default">0</p>
+                <a class="v2ex-text-default" href="#">特别关注</a>
+            </div>
+        </div>
+    </div>
+    <div class="v2ex-sidebar-cell">
+        <div class="v2ex-line2"></div>
+    </div>
+    <div class="v2ex-sidebar-cell">
+        <img class="v2ex-add" src="{{ url_for('static', filename='img/add.png') }}" />
+        <a class="v2ex-a-gray1" href="{{ url_for('topic.add') }}">创作新主题</a>
+    </div>
+    <div class="v2ex-sidebar-cell">
+        <a class="v2ex-a-gray1" href="#">0 条未读提醒</a>
+    </div>
+</div>
